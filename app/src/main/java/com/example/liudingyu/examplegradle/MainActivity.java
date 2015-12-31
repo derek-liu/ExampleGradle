@@ -12,6 +12,7 @@ import com.hanks.htextview.HTextViewType;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         return !TextUtils.isEmpty(s) && s.toLowerCase().startsWith("what");
                     }
                 })
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
