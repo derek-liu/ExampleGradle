@@ -10,21 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.liudingyu.examplegradle.MainActivity">
 
-   <com.hanks.htextview.HTextView
-       android:id="@+id/h_textView"
-       android:layout_width="match_parent"
-       android:layout_height="100dp"
-       android:layout_centerInParent="true"
-       htext:animateType="scale"
-       android:gravity="center"
-       android:textSize="30sp"/>
-
     <Button
         android:id="@+id/switcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Switch"
-        android:layout_below="@id/h_textView"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>
