@@ -16,4 +16,39 @@
         android:layout_height="wrap_content"
         android:text="Switch"
         android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:layout_below="@id/switcher"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sans-serif"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sans-serif-light"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-light"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sans-serif-thin roboto thin (android 4.2)"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-thin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sans-serif-medium (android 5.0)"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
 </RelativeLayout>
