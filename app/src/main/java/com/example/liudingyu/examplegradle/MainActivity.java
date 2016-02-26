@@ -12,7 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import java.util.Random;
+import com.example.liudingyu.examplegradle.Mode.Weather;
+import com.example.liudingyu.examplegradle.Network.ApiClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,17 +40,40 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.switcher).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                handleClick();
-                handleNotification();
+                handleClick();
+//                handleNotification();
             }
         });
     }
 
     private void handleClick() {
-        Random random = new Random();
-      for (int i = 0; i < 100; i++) {
-          Log.d("d.d", "next:" + Math.abs(random.nextLong()) % 10);
-      }
+        Observable.create(new Observable.OnSubscribe<Weather>() {
+            @Override
+            public void call(Subscriber<? super Weather> subscriber) {
+                Weather weather = ApiClient.getInstance().getWeather("CN101010200", "66a764891c964cc6913351f6805e5a2c");
+                if (weather != null) {
+                    subscriber.onNext(weather);
+                }
+                subscriber.onCompleted();
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Weather>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("d.d", "error " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Weather weather) {
+                        Log.d("d.d", "success");
+                    }
+                });
     }
 
     private void handleNotification() {
