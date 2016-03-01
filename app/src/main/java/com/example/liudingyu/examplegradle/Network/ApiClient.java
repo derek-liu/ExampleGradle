@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient {
+public class ApiClient extends ApiClientErrorHandler {
 
     private IWeatherAPI mWeatherAPI;
     private static volatile ApiClient INSTANCE;
@@ -35,12 +35,15 @@ public class ApiClient {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
+                // add common parameter
                 HttpUrl url = request.url().newBuilder().addQueryParameter("name", "commomparamater").build();
                 request = request.newBuilder().url(url).build();
-                return chain.proceed(request);
+                return handleHTTPError(chain.proceed(request));
             }
         };
-        OkHttpClient client = clientBuilder.addInterceptor(interceptor).build();
+        OkHttpClient client = clientBuilder
+                .addInterceptor(interceptor)
+                .build();
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("http://api.heweather.com")
@@ -52,8 +55,11 @@ public class ApiClient {
     public Weather getWeather(String cityID, String key) {
         try {
             Call<Weather> call = mWeatherAPI.getWeather(cityID, key);
-            return call.execute().body();
+            Request request = call.request();
+            retrofit2.Response<Weather> response = call.execute();
+            return (Weather) handleStatusError(request, response.body());
         } catch (Exception e) {
+            handleRuntimeException(e);
             return null;
         }
     }
