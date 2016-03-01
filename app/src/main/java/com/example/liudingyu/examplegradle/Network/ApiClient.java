@@ -64,4 +64,19 @@ public class ApiClient extends ApiClientErrorHandler {
         }
     }
 
+
+    public Weather postWeather(String cityID, String key) {
+        try {
+            Weather weather = new Weather();
+            weather.weather = "post test";
+            Call<Weather> call = mWeatherAPI.postWeather(cityID, key, weather);
+            Request request = call.request();
+            retrofit2.Response<Weather> response = call.execute();
+            return (Weather)handleStatusError(request, response.body());
+        } catch (Exception e) {
+            handleRuntimeException(e);
+            return null;
+        }
+    }
+
 }
