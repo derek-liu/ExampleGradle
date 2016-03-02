@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //                handleNotification();
             }
         });
+        BaseClient.setName("derek");
     }
 
     private void handleClick() {
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("d.d", "success");
                     }
                 });
+        ClientA.getInstance().printName();
+        ClientB.getInstance().printName();
     }
 
     private void handleNotification() {
