@@ -31,18 +31,29 @@ public class ApiClient extends ApiClientErrorHandler {
 
     private ApiClient() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        Interceptor interceptor = new Interceptor() {
+        Interceptor interceptor1 = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 // add common parameter
-                HttpUrl url = request.url().newBuilder().addQueryParameter("name", "commomparamater").build();
+                HttpUrl url = request.url().newBuilder().addQueryParameter("name1", "commomparamater1").build();
+                request = request.newBuilder().url(url).build();
+                return handleHTTPError(chain.proceed(request));
+            }
+        };
+        Interceptor interceptor2 = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                // add common parameter
+                HttpUrl url = request.url().newBuilder().addQueryParameter("name2", "commomparamater2").build();
                 request = request.newBuilder().url(url).build();
                 return handleHTTPError(chain.proceed(request));
             }
         };
         OkHttpClient client = clientBuilder
-                .addInterceptor(interceptor)
+                .addInterceptor(interceptor1)
+                .addInterceptor(interceptor2)
                 .build();
 
         Retrofit.Builder builder = new Retrofit.Builder()
