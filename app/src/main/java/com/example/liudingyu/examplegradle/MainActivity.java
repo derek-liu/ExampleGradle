@@ -14,16 +14,10 @@ import android.view.View;
 
 import com.example.liudingyu.examplegradle.Mode.Weather;
 import com.example.liudingyu.examplegradle.Network.ApiClient;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 import rx.Observable;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -44,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
 //                handleNotification();
             }
         });
-        BaseClient.setName("derek");
+        AdView adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     private void handleClick() {
@@ -75,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("d.d", "success");
                     }
                 });
-        ClientA.getInstance().printName();
-        ClientB.getInstance().printName();
     }
 
     private void handleNotification() {
