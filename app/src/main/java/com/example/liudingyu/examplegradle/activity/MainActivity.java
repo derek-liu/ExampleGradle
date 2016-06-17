@@ -1,8 +1,9 @@
-package com.example.liudingyu.examplegradle;
+package com.example.liudingyu.examplegradle.activity;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,8 +15,8 @@ import android.view.View;
 
 import com.example.liudingyu.examplegradle.Mode.Weather;
 import com.example.liudingyu.examplegradle.Network.ApiClient;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.example.liudingyu.examplegradle.R;
+import com.google.android.gms.analytics.Logger;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -30,17 +31,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        findViewById(R.id.switcher).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.imageview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleClick();
-//                handleNotification();
             }
         });
-        AdView adView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        findViewById(R.id.go).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MDActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void handleClick() {
