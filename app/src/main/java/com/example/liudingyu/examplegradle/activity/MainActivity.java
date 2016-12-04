@@ -17,6 +17,7 @@ import com.example.liudingyu.examplegradle.Mode.Weather;
 import com.example.liudingyu.examplegradle.Network.ApiClient;
 import com.example.liudingyu.examplegradle.R;
 
+import cn.campusapp.router.Router;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CustomViewActivity.class);
-                startActivity(intent);
+                Router.open("activity://CustomViewActivity");
             }
         });
     }

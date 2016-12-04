@@ -8,9 +8,11 @@ import android.view.TextureView;
 
 import com.example.liudingyu.examplegradle.R;
 
+import cn.campusapp.router.annotation.RouterMap;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
+@RouterMap("activity://VideoActivity")
 public class VideoActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener, IMediaPlayer.OnPreparedListener {
 
     private TextureView mTextureView;

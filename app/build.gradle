@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 23
@@ -35,4 +36,7 @@ dependencies {
 
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.1'
+
+    compile 'com.github.campusappcn.AndRouter:router:1.2.4'
+    apt 'com.github.campusappcn.AndRouter:compiler:1.2.4'
 }

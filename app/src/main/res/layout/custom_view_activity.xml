@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:circle_progressbar_progress="40"
         app:circle_progressbar_inner_radius="40dp"
         app:circle_progressbar_stroke_width="5dp" />
 

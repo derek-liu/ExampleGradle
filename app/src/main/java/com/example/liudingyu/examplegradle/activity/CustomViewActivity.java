@@ -7,6 +7,9 @@ import com.example.liudingyu.examplegradle.R;
 import com.example.liudingyu.examplegradle.utils.Util;
 import com.example.liudingyu.examplegradle.view.StarChoiceLayout;
 
+import cn.campusapp.router.annotation.RouterMap;
+
+@RouterMap({"activity://CustomViewActivity"})
 public class CustomViewActivity extends AppCompatActivity {
 //    private StarChoiceLayout mLayout;
 
