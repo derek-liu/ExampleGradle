@@ -16,7 +16,6 @@ import android.view.View;
 import com.example.liudingyu.examplegradle.Mode.Weather;
 import com.example.liudingyu.examplegradle.Network.ApiClient;
 import com.example.liudingyu.examplegradle.R;
-import com.google.android.gms.analytics.Logger;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -37,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 handleClick();
             }
         });
-        findViewById(R.id.go).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MDActivity.class);
+                Intent intent = new Intent(MainActivity.this, CustomViewActivity.class);
                 startActivity(intent);
             }
         });

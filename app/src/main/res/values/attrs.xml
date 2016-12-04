@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="custom_circle_progress">
+        <attr name="circle_progressbar_inner_radius" format="dimension" />
+        <attr name="circle_progressbar_stroke_width" format="dimension" />
+        <attr name="circle_progressbar_progress" format="integer"/>
+    </declare-styleable>
+</resources>
