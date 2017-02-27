@@ -4,75 +4,51 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
-import com.example.liudingyu.examplegradle.Mode.Weather;
-import com.example.liudingyu.examplegradle.Network.ApiClient;
+import com.bumptech.glide.Glide;
 import com.example.liudingyu.examplegradle.R;
-
-import cn.campusapp.router.Router;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
     private String[] mData = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
+    private ImageView mImageView, mSecondImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.imageview).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleClick();
-            }
-        });
         findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Router.open("activity://CustomViewActivity");
+//                handleClick(mImageView);
+//                ((BitmapDrawable) mImageView.getDrawable()).getBitmap().recycle();
+//                findViewById(R.id.root_view).invalidate();
+//                mImageView.requestLayout();
+//                mSecondImageView.requestLayout();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
             }
         });
+        /*
+        mImageView = (ImageView) findViewById(R.id.firstImage);
+        mSecondImageView = (ImageView) findViewById(R.id.secondImage);
+        mSecondImageView.setImageDrawable(mImageView.getDrawable());
+        */
     }
 
-    private void handleClick() {
-        Observable.create(new Observable.OnSubscribe<Weather>() {
-            @Override
-            public void call(Subscriber<? super Weather> subscriber) {
-                Weather weather = ApiClient.getInstance().getWeather("CN101010200", "66a764891c964cc6913351f6805e5a2c");
-                if (weather != null) {
-                    subscriber.onNext(weather);
-                }
-                subscriber.onCompleted();
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Weather>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("d.d", "error " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Weather weather) {
-                        Log.d("d.d", "success");
-                    }
-                });
+    private void handleClick(View view) {
+        Intent intent = new Intent(this, VideoActivity.class);
+        startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "sharedView").toBundle());
     }
 
     private void handleNotification() {
@@ -90,5 +66,10 @@ public class MainActivity extends AppCompatActivity {
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(bigText));
 
         mNm.notify(1, builder.build());
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 }

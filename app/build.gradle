@@ -39,4 +39,9 @@ dependencies {
 
     compile 'com.github.campusappcn.AndRouter:router:1.2.4'
     apt 'com.github.campusappcn.AndRouter:compiler:1.2.4'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile ('com.github.bumptech.glide:okhttp3-integration:1.4.0') {
+        exclude group: 'glide-parent'
+    }
 }
