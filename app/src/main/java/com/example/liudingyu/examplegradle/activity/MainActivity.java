@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.liudingyu.examplegradle.R;
+import com.example.liudingyu.examplegradle.view.VolumeWaveView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int PATH_PEOPLE_ID = 0;
     private static final int PATH_PEOPLE_NUMBER_ID = 1;
 
+    private VolumeWaveView mWaveView;
+
     static {
         uriMatcher.addURI(AUTHORITY, PATH_PEOPLE, PATH_PEOPLE_ID);
         uriMatcher.addURI(AUTHORITY, PATH_PEOPLE_NUMBER, PATH_PEOPLE_NUMBER_ID);
@@ -36,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mWaveView = (VolumeWaveView) findViewById(R.id.wave_view);
         findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleClick(v);
+                mWaveView.setVisibility(mWaveView.getVisibility() != View.VISIBLE ? View.VISIBLE : View.GONE);
             }
         });
     }
