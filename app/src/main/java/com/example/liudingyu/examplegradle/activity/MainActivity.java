@@ -1,5 +1,6 @@
 package com.example.liudingyu.examplegradle.activity;
 
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWaveView.setVisibility(mWaveView.getVisibility() != View.VISIBLE ? View.VISIBLE : View.GONE);
+//                mWaveView.setVisibility(mWaveView.getVisibility() != View.VISIBLE ? View.VISIBLE : View.GONE);
+                startActivity(new Intent(MainActivity.this, KotlinActivity.class));
             }
         });
     }
